@@ -1,66 +1,92 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Ureeka API Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Introduction
+As a member of Ureeka, I have a project to make an API and also make a documentation using Postman
 
-## About Laravel
+## Library Management API Documentation
+Welcome to the Library Management API documentation. This API provides endpoints to manage users and books within a library system.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Endpoints
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### 1. Login
+Description: Authenticate a user to obtain an access token.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Endpoint: POST /api/login
 
-## Learning Laravel
+Usage: Use this request to log in with your registered credentials. On successful authentication, you'll receive an access token to access protected endpoints.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### 2. Register
+Description: Register a new user.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Endpoint: POST /api/register
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Usage: Register a new user with a unique email address. Provide name, email, password, and password confirmation in the request body to create a new user account.
 
-## Laravel Sponsors
+#### 3. Get User
+Description: Retrieve user details.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Endpoint: GET /api/user
 
-### Premium Partners
+Usage: Fetch details of the currently authenticated user. Include the access token obtained from the login request in the Authorization header as a Bearer token.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+#### 4. View Books
+Description: Retrieve all books.
 
-## Contributing
+Endpoint: GET /api/books
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Usage: Retrieve a list of all books available in the library. Requires authentication; include the access token in the Authorization header.
 
-## Code of Conduct
+#### 5. Add Books
+Description: Add a new book (Admin only).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Endpoint: POST /api/books
 
-## Security Vulnerabilities
+Usage: Add a new book to the library collection. Only accessible to users with admin privileges. Provide book details including title, ISBN, author, and year of publication in the request body.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### 6. Update Books
+Description: Update an existing book (Admin only).
 
-## License
+Endpoint: PUT /api/books/{id}
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Usage: Update details of an existing book identified by {id}. Only accessible to users with admin privileges. Provide updated book details in the request body.
+
+#### 7. Delete Books
+Description: Delete a book (Admin only).
+
+Endpoint: DELETE /api/books/{id}
+
+Usage: Delete a book from the library collection identified by {id}. Only accessible to users with admin privileges. No request body is required; just provide the book ID in the endpoint URL.
+
+### Getting Started
+#### Authentication:
+
+Start by logging in with your credentials using the Login request. Copy the access token from the response.
+
+Use the obtained token as a Bearer token in the Authorization header for subsequent requests.
+
+#### Managing Books:
+
+Use View Books to see all available books.
+
+Add new books using Add Books, ensuring to provide all required details.
+
+Update existing books with Update Books, specifying the book ID and updated information.
+
+Delete unwanted books using Delete Books, supplying the book ID to remove from the collection.
+
+#### User Management:
+
+Retrieve user details with Get User to view your own profile information.
+
+### Notes:
+Ensure proper authentication for requests requiring admin privileges (Add Books, Update Books, Delete Books).
+
+Validate request bodies to meet API requirements, such as unique email addresses for user registration and complete book details for Add Books and Update Books.
+
+## Postman Documentation Link:
+<a href="https://documenter.getpostman.com/view/35383957/2sA3XQh2MW">Postman Documentation Link</a>
+
+## Made By
+Name: Stanley Nathanael Wijaya
+<br><br>
+<code>Always strive for excellence ✨✨</code>
